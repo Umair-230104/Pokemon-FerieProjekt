@@ -78,6 +78,31 @@ public class PokemonDAO implements IDAO
         }
     }
 
+    public void savePokemonsToDb(List<PokemonDetailDTO> pokemonDetailDTOList)
+    {
+        try (EntityManager em = emf.createEntityManager())
+        {
+            em.getTransaction().begin();
+            for (PokemonDetailDTO pokemonDetailDTO : pokemonDetailDTOList)
+            {
+                Pokemon pokemon = new Pokemon();
+                pokemon.setId(pokemonDetailDTO.getId());
+                pokemon.setName(pokemonDetailDTO.getName());
+                pokemon.setHeight(pokemonDetailDTO.getHeight());
+                pokemon.setWeight(pokemonDetailDTO.getWeight());
+
+                // Create Type entities and associate them with the Pokemon
+                List<Type> types = pokemonDetailDTO.getTypes().stream()
+                        .map(typeDTO -> new Type(typeDTO, pokemon))  // Pass the Pokemon entity to the Type, including its name
+                        .collect(Collectors.toList());
+
+                pokemon.setTypes(types);
+                em.persist(pokemon);
+            }
+            em.getTransaction().commit();
+        }
+    }
+
     @Override
     public Object update(Object o, Object o2)
     {

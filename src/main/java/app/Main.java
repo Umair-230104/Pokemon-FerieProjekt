@@ -15,10 +15,16 @@ package app;
 //Vi henter height weight name id og types ned fra APIen
 
 import app.config.HibernateConfig;
+import app.daos.PokemonDAO;
+import app.dtos.PokemonDetailDTO;
+import app.service.PokemonService;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+
+import static app.service.PokemonService.pokemonDTOList;
 
 public class Main
 {
@@ -26,6 +32,10 @@ public class Main
     {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("pokemondb");
         //        AppConfig.startServer();
+
+
+        PokemonService pokemonService = new PokemonService(new PokemonDAO(emf));
+        pokemonService.getPokemonsToDB();
 
     }
 }

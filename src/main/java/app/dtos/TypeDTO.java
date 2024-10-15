@@ -3,15 +3,20 @@ package app.dtos;
 import app.entities.Type;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+@NoArgsConstructor
 public class TypeDTO
 {
     private Long id;
     private TypeInfoDTO type;
     private Long pokemonId;
     private String pokemonName;
+
+
+
 
     public TypeDTO(TypeInfoDTO type, Long pokemonId, String pokemonName) {
         this.type = type; // Assign the TypeInfoDTO object

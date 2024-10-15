@@ -1,5 +1,6 @@
 package app.service;
 
+import app.daos.PokemonDAO;
 import app.dtos.PokemonDTO;
 import app.dtos.PokemonDTOResponse;
 import app.dtos.PokemonDetailDTO;
@@ -18,7 +19,63 @@ import java.util.List;
 public class PokemonService
 {
     private static final String BASE_URL_Pokemon = "https://pokeapi.co/api/v2/pokemon/";
-    private final List<PokemonDTO> pokemonDTOList = new ArrayList<>();
+    public static final List<PokemonDTO> pokemonDTOList = new ArrayList<>();
+    private PokemonDAO pokemonDAO;
+
+    public PokemonService(PokemonDAO pokemonDAO)
+    {
+        this.pokemonDAO = pokemonDAO;
+    }
+
+    public void getPokemonsToDB() throws IOException, InterruptedException, URISyntaxException
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest
+                .newBuilder()
+                .uri(new URI(BASE_URL_Pokemon))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200)
+        {
+            String json = response.body();
+            ObjectMapper objectMapper = new ObjectMapper();
+            PokemonDTOResponse pokemonDTOResponse = objectMapper.readValue(json, PokemonDTOResponse.class);
+
+            if (pokemonDTOResponse.getPokemons() != null)
+            {
+                List<PokemonDetailDTO> pokemonDetailDTOList = new ArrayList<>();
+
+                // Fetch detailed Pokémon data for each Pokémon
+                for (PokemonDTO pokemonDTO : pokemonDTOResponse.getPokemons())
+                {
+                    String pokemonUrl = pokemonDTO.getUrl();
+                    HttpRequest detailRequest = HttpRequest.newBuilder()
+                            .uri(URI.create(pokemonUrl))
+                            .GET()
+                            .build();
+                    HttpResponse<String> detailResponse = client.send(detailRequest, HttpResponse.BodyHandlers.ofString());
+
+                    if (detailResponse.statusCode() == 200)
+                    {
+                        String detailJson = detailResponse.body();
+                        PokemonDetailDTO pokemonDetail = objectMapper.readValue(detailJson, PokemonDetailDTO.class);
+                        pokemonDetailDTOList.add(pokemonDetail);
+                    }
+                }
+
+                // Save all Pokémon details to the database
+                savePokemonsToDb(pokemonDetailDTOList);
+            }
+        }
+    }
+
+    // Method to save a list of Pokémon details to the database
+    private void savePokemonsToDb(List<PokemonDetailDTO> pokemonDetailDTOList) {
+        pokemonDAO.savePokemonsToDb(pokemonDetailDTOList);
+    }
 
     public void getPokemonById(int id) throws IOException, InterruptedException, URISyntaxException
     {
