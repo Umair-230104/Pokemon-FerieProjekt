@@ -13,13 +13,12 @@ public class TypeDTO
     private Long pokemonId;
     private String pokemonName;
 
-    public TypeDTO(Long id, TypeInfoDTO type, Long pokemonId, String pokemonName)
-    {
-        this.id = id;
-        this.type = type;
+    public TypeDTO(TypeInfoDTO type, Long pokemonId, String pokemonName) {
+        this.type = type; // Assign the TypeInfoDTO object
         this.pokemonId = pokemonId;
         this.pokemonName = pokemonName;
     }
+
 
     // Constructor to create TypeDTO from Type entity
     public TypeDTO(Type type)
