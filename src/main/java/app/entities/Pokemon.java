@@ -60,17 +60,14 @@ public class Pokemon
 //        this.types = pokemonDetailDTO.getTypes().stream().map(Type::new).collect(Collectors.toList());
 //    }
 
-
-//    // src/main/java/app/entities/Pokemon.java
-//    @Override
-//    public String toString()
-//    {
-//        return "Pokemon{" +
-//                "id=" + id +
-//                ", height=" + height +
-//                ", weight=" + weight +
-//                ", name='" + name + '\'' +
-//                // Exclude types to avoid recursive call
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "id=" + id +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", name='" + name + '\'' +
+                ", types=" + types.stream().map(Type::getName).collect(Collectors.joining(", ")) +
+                '}';
+    }
 }

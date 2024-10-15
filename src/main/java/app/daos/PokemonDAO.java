@@ -1,7 +1,6 @@
 package app.daos;
 
 import app.dtos.PokemonDetailDTO;
-import app.entities.Hotel;
 import app.entities.Pokemon;
 import app.entities.Type;
 import jakarta.persistence.EntityManager;
@@ -47,27 +46,6 @@ public class PokemonDAO implements IDAO
         }
     }
 
-
-//    public void saveMoviesToDb(List<MovieDTO> movieDTOList)
-//    {
-//        try (EntityManager em = emf.createEntityManager())
-//        {
-//            em.getTransaction().begin();
-//            for (MovieDTO movieDTO : movieDTOList)
-//            {
-//                Movie movie = new Movie();
-//                movie.setTitle(movieDTO.getTitle());
-//                movie.setOverview(movieDTO.getOverview());
-//                movie.setReleaseDate(movieDTO.getReleaseDate());
-//                movie.setRating(movieDTO.getRating());
-//                movie.setOriginalLanguage(movieDTO.getOriginalLanguage());
-//                movie.setPopularity(movieDTO.getPopularity());
-//                em.persist(movie);
-//            }
-//            em.getTransaction().commit();
-//        }
-//    }
-
     public void updatePokemon(Pokemon pokemon, PokemonDetailDTO pokemonDetailDTO)
     {
         try (var em = emf.createEntityManager())
@@ -84,7 +62,8 @@ public class PokemonDAO implements IDAO
 
             // Map the new types from the DTO and set the Pokemon reference
             List<Type> updatedTypes = pokemonDetailDTO.getTypes().stream()
-                    .map(typeDTO -> {
+                    .map(typeDTO ->
+                    {
                         Type type = new Type(typeDTO.getType().getName(), pokemon);  // Set the pokemon reference here
                         return type;
                     })
@@ -98,62 +77,6 @@ public class PokemonDAO implements IDAO
             em.getTransaction().commit();
         }
     }
-
-
-//    public void updatePokemon(Pokemon pokemon, PokemonDetailDTO pokemonDetailDTO)
-//    {
-//        try (var em = emf.createEntityManager())
-//        {
-//            em.getTransaction().begin();
-//
-//            // Update Pokémon's basic information
-//            pokemon.setName(pokemonDetailDTO.getName());
-//            pokemon.setHeight(pokemonDetailDTO.getHeight());
-//            pokemon.setWeight(pokemonDetailDTO.getWeight());
-//
-//            pokemon.setTypes(pokemonDetailDTO.getTypes().stream()
-//                    .map(Type::new)
-//                    .collect(Collectors.toList()));
-//
-//            em.merge(pokemon);
-//            em.getTransaction().commit();
-//        }
-//    }
-
-//    public void updatePokemon(Pokemon pokemon, PokemonDetailDTO pokemonDetailDTO)
-//    {
-//        try (var em = emf.createEntityManager())
-//        {
-//            em.getTransaction().begin();
-//
-//            // Update Pokémon's basic information
-//            pokemon.setName(pokemonDetailDTO.getName());
-//            pokemon.setHeight(pokemonDetailDTO.getHeight());
-//            pokemon.setWeight(pokemonDetailDTO.getWeight());
-//
-//            // Clear the existing types to handle orphan removal
-//            pokemon.getTypes().clear();
-//
-//            // Add the new types from the DTO
-//            List<Type> updatedTypes = pokemonDetailDTO.getTypes().stream()
-//                    .map(typeDTO ->
-//                    {
-//                        Type newType = new Type();
-//                        newType.setName(typeDTO.getType().getName());
-//                        newType.setPokemon(pokemon);  // Important: Set the parent Pokémon
-//                        return newType;
-//                    })
-//                    .collect(Collectors.toList());
-//
-//            // Set the updated types
-//            pokemon.setTypes(updatedTypes);
-//
-//            // Update the Pokémon entity
-//            em.merge(pokemon);
-//            em.getTransaction().commit();
-//        }
-//    }
-
 
     @Override
     public Object update(Object o, Object o2)

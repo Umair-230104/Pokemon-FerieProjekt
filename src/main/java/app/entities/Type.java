@@ -37,14 +37,4 @@ public class Type
     {
         this.name = typeDTO.getType().getName();
     }
-
-    // src/main/java/app/entities/Type.java
-@Override
-public String toString() {
-    return "Type{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            // Exclude pokemon to avoid recursive call
-            '}';
-}
 }
