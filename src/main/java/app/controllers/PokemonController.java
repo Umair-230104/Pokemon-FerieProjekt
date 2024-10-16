@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PokemonController
 {
-    private final Logger log = LoggerFactory.getLogger(HotelController.class);
+    private final Logger log = LoggerFactory.getLogger(PokemonController.class);
     PokemonDAO pokemonDAO;
 
     public PokemonController(PokemonDAO pokemonDAO)

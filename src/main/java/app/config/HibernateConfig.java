@@ -1,19 +1,14 @@
 package app.config;
 
 
-import app.entities.Hotel;
 import app.entities.Pokemon;
-import app.entities.Room;
 import app.entities.Type;
-import app.security.entities.Role;
-import app.security.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import java.sql.Types;
 import java.util.Properties;
 
 /**
@@ -42,8 +37,6 @@ public class HibernateConfig
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration)
     {
-//        configuration.addAnnotatedClass(Hotel.class);
-//        configuration.addAnnotatedClass(Room.class);
 //        configuration.addAnnotatedClass(User.class);
 //        configuration.addAnnotatedClass(Role.class);
 
@@ -85,7 +78,6 @@ public class HibernateConfig
 
     private static String getDBName()
     {
-
 //        return Utils.getPropertyValue("db.name", "properties-from-pom.properties");
         return "emp_ex";
     }

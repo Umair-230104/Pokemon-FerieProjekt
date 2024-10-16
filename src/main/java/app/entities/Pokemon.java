@@ -51,15 +51,6 @@ public class Pokemon
                 .collect(Collectors.toList());
     }
 
-//    public Pokemon(PokemonDetailDTO pokemonDetailDTO)
-//    {
-//        this.id = pokemonDetailDTO.getId();
-//        this.height = pokemonDetailDTO.getHeight();
-//        this.weight = pokemonDetailDTO.getWeight();
-//        this.name = pokemonDetailDTO.getName();
-//        this.types = pokemonDetailDTO.getTypes().stream().map(Type::new).collect(Collectors.toList());
-//    }
-
     @Override
     public String toString()
     {

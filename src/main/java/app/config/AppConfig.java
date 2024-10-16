@@ -1,7 +1,5 @@
 package app.config;
 
-
-
 import app.controllers.ExceptionController;
 import app.exception.ApiException;
 import app.routes.Routes;
@@ -40,9 +38,9 @@ public class AppConfig
         app.exception(ApiException.class, exceptionController::apiExceptionHandler);
         app.exception(Exception.class, exceptionController::exceptionHandler);
     }
-    
+
     // == Start server ==
-    public static void  startServer()
+    public static void startServer()
     {
         var app = Javalin.create(AppConfig::configuration);
         exceptionHandler(app);

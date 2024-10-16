@@ -1,8 +1,6 @@
 package app.dtos;
 
-import app.entities.Hotel;
 import app.entities.Pokemon;
-import app.entities.Room;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,23 +18,6 @@ public class PokemonDetailDTO
     private int weight;
     private String name;
     private List<TypeDTO> types;
-
-    public PokemonDetailDTO(Long id, int height, int weight, String name, List<TypeDTO> types)
-    {
-        this.id = id;
-        this.height = height;
-        this.weight = weight;
-        this.name = name;
-        this.types = types;
-    }
-
-    public PokemonDetailDTO(String name, int height, int weight, List<TypeDTO> types)
-    {
-        this.height = height;
-        this.weight = weight;
-        this.name = name;
-        this.types = types;
-    }
 
     public PokemonDetailDTO(Pokemon pokemon)
     {

@@ -73,7 +73,8 @@ public class PokemonService
     }
 
     // Method to save a list of Pokémon details to the database
-    private void savePokemonsToDb(List<PokemonDetailDTO> pokemonDetailDTOList) {
+    private void savePokemonsToDb(List<PokemonDetailDTO> pokemonDetailDTOList)
+    {
         pokemonDAO.savePokemonsToDb(pokemonDetailDTOList);
     }
 
