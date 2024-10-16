@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static app.service.PokemonService.pokemonDTOList;
+
 
 public class Main
 {
