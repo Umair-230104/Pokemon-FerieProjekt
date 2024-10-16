@@ -6,6 +6,8 @@ import app.daos.PokemonDAO;
 import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
 
+import static io.javalin.apibuilder.ApiBuilder.*;
+
 public class PokemonRoute
 {
     private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("hotel");
@@ -16,13 +18,11 @@ public class PokemonRoute
     {
         return () ->
         {
-//            get("/", hotelController::getAllHotels);
-//            get("/{id}", hotelController::getHotelById);
-//            post("/", hotelController::createHotel);
-//            delete("/{id}", hotelController::deleteHotel);
-//            put("/{id}", hotelController::updateHotel);
-//            get("/rooms/{id}", hotelController::roomForSpecificHotel);
+            get("/", pokemonController::getAllPokemons);
+            get("/{id}", pokemonController::getPokemonById);
+            post("/", pokemonController::createPokemon);
+            delete("/{id}", pokemonController::deletePokemon);
+            put("/{id}", pokemonController::updatePokemon);
         };
     }
-
 }

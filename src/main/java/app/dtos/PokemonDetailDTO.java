@@ -1,11 +1,14 @@
 package app.dtos;
 
+import app.entities.Hotel;
 import app.entities.Pokemon;
+import app.entities.Room;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -44,4 +47,8 @@ public class PokemonDetailDTO
         this.types = pokemon.getTypes().stream().map(TypeDTO::new).toList();
     }
 
+    public static List<PokemonDetailDTO> toPokemonDetailDTOList(List<Pokemon> pokemons)
+    {
+        return pokemons.stream().map(PokemonDetailDTO::new).collect(Collectors.toList());
+    }
 }

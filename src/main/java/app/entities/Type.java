@@ -1,6 +1,7 @@
 package app.entities;
 
 import app.dtos.TypeDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class Type
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @JsonIgnore  // Prevent this field from being serialized directly
     private String name;
     @ManyToOne
     private Pokemon pokemon;
@@ -26,7 +28,7 @@ public class Type
     // Constructor to create Type from TypeDTO
     public Type(TypeDTO typeDTO, Pokemon pokemon)
     {
-        this.name = typeDTO.getType().getName();  // Map TypeInfoDTO name
+//        this.name = typeDTO.getType().getName();  // Map TypeInfoDTO name
         this.pokemon = pokemon;  // Assuming you have the Pokemon entity mapped here
         this.pokemonName = pokemon.getName();  // Set the Pokémon's name directly
 

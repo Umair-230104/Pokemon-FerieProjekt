@@ -18,7 +18,7 @@ public class Routes
         {
             path("/hotel", hotelRoute.getHotelRoutes());
             path("/room", roomRoute.getRoomRoutes());
-            path("pokemons", pokemonRoute.getPokemonRoutes());
+            path("/pokemon", pokemonRoute.getPokemonRoutes());
         };
     }
 }

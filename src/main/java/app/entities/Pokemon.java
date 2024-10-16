@@ -61,13 +61,16 @@ public class Pokemon
 //    }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Pokemon{" +
                 "id=" + id +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", name='" + name + '\'' +
-                ", types=" + types.stream().map(Type::getName).collect(Collectors.joining(", ")) +
+                ", types: " + types.stream()
+                .map(type -> type.getName() + " Id: " + type.getId())
+                .collect(Collectors.joining(", ")) +
                 '}';
     }
 }

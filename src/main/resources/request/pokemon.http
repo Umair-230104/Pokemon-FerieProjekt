@@ -1,0 +1,46 @@
+### Get all pokemons
+GET {{URL}}
+
+### Get pokemon by ID
+GET {{URL}}/20
+
+### Create a new Pokemon
+POST {{URL}}
+Content-Type: application/json
+
+{
+  "id": 21,
+  "height": 10,
+  "weight": 20,
+  "name": "Pikachu",
+  "types": [
+    {
+      "type": {
+        "name": "Electric"
+      }
+    }
+  ]
+}
+
+
+### Update a Pokemon by ID
+PUT {{URL}}/21
+Content-Type: application/json
+
+{
+  "id": 21,
+  "height": 12,
+  "weight": 22,
+  "name": "UPDATED Pikachu",
+  "types": [
+    {
+      "type": {
+        "id": 32,
+        "name": "Electric"
+      }
+    }
+  ]
+}
+
+### Delete a Pokemon by ID
+DELETE {{URL}}/21
